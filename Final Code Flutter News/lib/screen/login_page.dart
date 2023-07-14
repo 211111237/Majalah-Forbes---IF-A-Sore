@@ -87,7 +87,7 @@ class _login_pageState extends State<login_page> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => home(
-                                          initialTabIndex: 0,
+                                          initialTabIndex: 1,
                                         )));
                           },
                           child: Text(

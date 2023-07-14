@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/darkmode.dart';
+import '../provider/providerFontSize.dart';
 
 class setting_page extends StatefulWidget {
   const setting_page({Key? key}) : super(key: key);
@@ -12,13 +13,14 @@ class setting_page extends StatefulWidget {
 
 class _setting_page extends State<setting_page> {
   final List<String> items = ["Besar", "Sedang", "Kecil"];
-  String dropdownValue = 'Sedang';
+  //String dropdownValue = 'Sedang';
   bool valueNotifikasi = false;
   //bool valueDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<DarkThemeProvider>(context);
+    final fontProvider = Provider.of<FontSizeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Setting"),
@@ -77,28 +79,31 @@ class _setting_page extends State<setting_page> {
                 },
               ),
             ),
-            ListTile(
-              title: Text("FontSize"),
-              subtitle: Text(
-                "Mengatur ukuran text Artikel",
-                style: TextStyle(fontSize: 12),
-              ),
-              leading: Icon(Icons.text_fields),
-              trailing: DropdownButton(
-                value: dropdownValue,
-                icon: const Icon(Icons.keyboard_arrow_down),
-                items: items.map((String item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: Text(item),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue = newValue!;
-                  });
-                },
-              ),
+            Consumer<FontSizeProvider>(
+              builder: (context, fontSizeProvider, _) {
+                String dropdownValue = fontSizeProvider.dropdownValue;
+                return ListTile(
+                  title: Text("FontSize"),
+                  subtitle: Text(
+                    "Mengatur ukuran text Artikel",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  leading: Icon(Icons.text_fields),
+                  trailing: DropdownButton(
+                    value: dropdownValue,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: items.map((String item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      fontSizeProvider.UbahFontSize(newValue!);
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),

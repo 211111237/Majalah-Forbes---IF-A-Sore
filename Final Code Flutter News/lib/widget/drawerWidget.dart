@@ -35,8 +35,8 @@ class drawerWidget extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text("Megumin Exc"),
-            subtitle: Text("EmailDavid@gmail.com"),
+            title: Text("Users"),
+            subtitle: Text("Users@gmail.com"),
             leading: Container(
               height: 80,
               child: CircleAvatar(

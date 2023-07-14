@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projek1/screen/artikel_page.dart';
+import 'package:provider/provider.dart';
 import '../../data/data.dart';
+import '../../provider/providerFontSize.dart';
 
 class templateKotakBerita2 extends StatefulWidget {
   final Artikel artikel;
@@ -13,12 +15,27 @@ class templateKotakBerita2 extends StatefulWidget {
 class _templateKotakBerita2State extends State<templateKotakBerita2> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => artikel_page(artikel: widget.artikel)));
-      },
-      child: Container(
+    return GestureDetector(onTap: () {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => artikel_page(artikel: widget.artikel)));
+    }, child:
+        Consumer<FontSizeProvider>(builder: (context, fontSizeProvider, _) {
+      String dropdownValue = fontSizeProvider.dropdownValue;
+
+      double fontSizeJudul = 13;
+      double position = 47;
+
+      if (dropdownValue == 'Sedang') {
+        fontSizeJudul = 13;
+        position = 47;
+      } else if (dropdownValue == 'Kecil') {
+        fontSizeJudul = 12;
+        position = 47;
+      } else if (dropdownValue == 'Besar') {
+        fontSizeJudul = 16;
+        position = 55;
+      }
+      return Container(
           margin: EdgeInsets.only(right: 15),
           child: Stack(
             children: [
@@ -36,7 +53,7 @@ class _templateKotakBerita2State extends State<templateKotakBerita2> {
                   left: 0,
                   bottom: 18,
                   child: Container(
-                    height: 45,
+                    height: position,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(2),
@@ -53,14 +70,14 @@ class _templateKotakBerita2State extends State<templateKotakBerita2> {
                               maxLines: 2,
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
+                                  fontSize: fontSizeJudul,
                                   fontFamily: 'Regular')),
                         )
                       ],
                     ),
                   ))
             ],
-          )),
-    );
+          ));
+    }));
   }
 }

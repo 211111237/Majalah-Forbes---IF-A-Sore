@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:projek1/provider/darkmode.dart';
 import 'package:projek1/provider/providerFollowed.dart';
+import 'package:projek1/provider/providerFontSize.dart';
 import 'package:projek1/screen/register_kirim_code.dart';
 import 'package:projek1/screen/setting_page.dart';
 import 'package:projek1/screen/tentang_kami.dart';
@@ -25,6 +26,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => DarkThemeProvider()),
       ChangeNotifierProvider(create: (_) => FollowedProvider()),
+      ChangeNotifierProvider(create: (_) => FontSizeProvider())
     ],
     child: const MyApp(),
   ));
@@ -46,9 +48,11 @@ class _MyAppState extends State<MyApp> {
           ? themeProvider.dark
           : themeProvider.light,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(resizeToAvoidBottomInset: false, body: register_page()
-          //home(initialTabIndex: 1),
-          ),
+      home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: //setting_page()
+            home(initialTabIndex: 1),
+      ),
     );
   }
 }

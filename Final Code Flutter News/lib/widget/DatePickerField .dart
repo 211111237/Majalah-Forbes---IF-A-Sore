@@ -37,11 +37,13 @@ class _TanggalLahirState extends State<TanggalLahir> {
       //height: MediaQuery.of(context).size.width / 3,
       child: Column(
         children: [
-          TextFormField(
+          TextField(
             controller: dateInput,
 
             decoration: InputDecoration(
-              labelText: "Tanggal Lahir",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              hintText: "Tanggal Lahir",
             ),
             readOnly: true,
             //set it true, so that user will not able to edit text
@@ -58,7 +60,7 @@ class _TanggalLahirState extends State<TanggalLahir> {
                 print(
                     pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                 String formattedDate =
-                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                    DateFormat('dd-MM-yyyy').format(pickedDate);
                 print(
                     formattedDate); //formatted date output using intl package =>  2021-03-16
                 setState(() {
